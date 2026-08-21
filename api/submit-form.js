@@ -13,9 +13,9 @@ export default async function handler(req, res) {
         const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfgvP_8lGbZ5DlZ7JPA7ai-km6_dpN2hMJzrz0p7OfABkq5XQ/formResponse';
 
         const params = new URLSearchParams();
-        params.append('entry.1913154893', firstName);
-        params.append('entry.1629609847', phone);
-        params.append('entry.681848502', email);
+        params.append('entry.222791783', firstName);
+        params.append('entry.308378775', phone);
+        params.append('entry.152511747', email);
 
         const response = await fetch(GOOGLE_FORM_ACTION, {
             method: 'POST',
