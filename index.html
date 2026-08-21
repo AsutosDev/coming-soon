@@ -1,1 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Animated background elements */
+        .background-orbs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            top: 0;
+            left: 0;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(80px);
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #6366f1, transparent);
+            top: -50px;
+            left: -50px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #8b5cf6, transparent);
+            bottom: -50px;
+            right: -50px;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #06b6d4, transparent);
+            top: 50%;
+            right: 10%;
+            animation: float 22s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(30px, -30px);
+            }
+        }
+
+        /* Grid animation */
+        .grid-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(0deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-shift 8s linear infinite;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+
+        @keyframes grid-shift {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px 10px;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Animated loading graphic */
+        .loading-graphic {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .loading-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(99, 102, 241, 0.2);
+            border-top: 3px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 3s linear infinite;
+        }
+
+        .loading-ring:nth-child(2) {
+            width: 64px;
+            height: 64px;
+            top: 8px;
+            left: 8px;
+            border-top-color: #8b5cf6;
+            animation: spin 2s linear infinite reverse;
+        }
+
+        .loading-ring:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 20px;
+            left: 20px;
+            border-top-color: #06b6d4;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.7); }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff, #d0d0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            animation: fade-in 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+            color: #a0a0c0;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            animation: fade-in 0.8s ease-out 0.2s both;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+            animation: fade-in 0.8s ease-out 0.4s both;
+        }
+
+        .form-group {
+            width: 100%;
+        }
+
+        .phone-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .phone-input-wrapper:focus-within {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .country-code {
+            color: #a0a0c0;
+            font-weight: 500;
+            white-space: nowrap;
+            font-size: 16px;
+        }
+
+        input {
+            flex: 1;
+            padding: 14px 0;
+            border: none;
+            background: transparent;
+            color: #e0e0e0;
+            font-size: 16px; /* Prevents auto-zoom on iOS */
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: #707090;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group input:focus {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        button {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            animation: fade-in 0.8s ease-out 0.6s both;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            color: #a0a0c0;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            border-color: #6366f1;
+            color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .status {
+            margin-top: 24px;
+            font-size: 13px;
+            color: #707090;
+            animation: fade-in 0.8s ease-out 0.8s both;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message {
+            margin-top: 12px;
+            font-size: 13px;
+            min-height: 18px;
+        }
+
+        .message.success { color: #10b981; }
+        .message.error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <div class="grid-bg"></div>
+
+    <div class="content">
+        <div class="logo-container">
+            <div class="loading-graphic">
+                <div class="loading-ring"></div>
+                <div class="loading-ring"></div>
+                <div class="loading-ring"></div>
+                <div class="loading-dot"></div>
+            </div>
+        </div>
+
+        <h1>Something amazing is coming</h1>
+        <p class="subtitle">We're working on something special. Be the first to know when we launch.</p>
+
+        <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <input type="text" id="firstName" placeholder="First name" required>
+            </div>
+            <div class="form-group">
+                <div class="phone-input-wrapper">
+                    <span class="country-code">+977</span>
+                    <input type="tel" id="phone" placeholder="98XXXXXXXX" maxlength="10" pattern="[0-9]{10}" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="email" id="emailInput" placeholder="Enter your email" required>
+            </div>
+            <button type="submit" id="submitBtn">Notify me</button>
+        </form>
+
+        <div class="message" id="message"></div>
+
+        <div class="social-links">
+            <a href="https://x.com/AashutoshKafle" target="_blank" rel="noopener noreferrer" title="Twitter/X">𝕏</a>
+            <a href="https://www.linkedin.com/in/aashutosh-kafle-00356332a/" target="_blank" rel="noopener noreferrer" title="LinkedIn">in</a>
+            <a href="https://github.com/AsutosDev" target="_blank" rel="noopener noreferrer" title="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            Building in progress
+        </div>
+    </div>
+
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            const firstNameInput = document.getElementById('firstName');
+            const phoneInput = document.getElementById('phone');
+            const emailInput = document.getElementById('emailInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('message');
+
+            const firstName = firstNameInput.value;
+            const phone = '+977' + phoneInput.value;
+            const email = emailInput.value;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            messageDiv.textContent = '';
+            messageDiv.className = 'message';
+
+            try {
+                const response = await fetch('/api/submit-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        firstName,
+                        phone,
+                        email
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.textContent = '✓ Thanks! We\'ll notify you soon.';
+                    messageDiv.className = 'message success';
+                    firstNameInput.value = '';
+                    phoneInput.value = '';
+                    emailInput.value = '';
+                    submitBtn.textContent = 'Notify me';
+                    submitBtn.disabled = false;
+                } else {
+                    throw new Error(data.error || 'Submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageDiv.textContent = '✗ Something went wrong. Please try again.';
+                messageDiv.className = 'message error';
+                submitBtn.textContent = 'Notify me';
+                submitBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
